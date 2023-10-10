@@ -12,7 +12,7 @@ import { ProductsModule } from './products/products.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       driver: ApolloDriver,
-      playground: false,
+      playground: true,
       path: '/graphql',
     }),
     MongooseModule.forRoot(process.env.DB_URI),
