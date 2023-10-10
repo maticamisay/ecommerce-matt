@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 
@@ -9,6 +9,11 @@ enum RoleType {
   USER = 'USER',
   GUEST = 'GUEST',
 }
+
+registerEnumType(RoleType, {
+  name: 'RoleType',
+  description: 'Different types of roles available',
+});
 
 @ObjectType()
 @Schema()
@@ -25,7 +30,7 @@ export class User {
   password: string;
 
   @Field(() => RoleType)
-  @Prop({ required: true })
+  @Prop({ type: String, enum: RoleType, default: RoleType.USER })
   role: RoleType;
 }
 

@@ -9,15 +9,34 @@ type Product {
   price: Float!
 }
 
+type User {
+  id: String!
+  username: String!
+  password: String!
+  role: RoleType!
+}
+
+"""Different types of roles available"""
+enum RoleType {
+  ADMIN
+  USER
+  GUEST
+}
+
 type Query {
   products: [Product!]!
   product(id: String!): Product!
+  users: [User!]!
+  user(id: String!): User!
 }
 
 type Mutation {
   createProduct(input: CreateProductDto!): Product!
   updateProduct(input: UpdateProductDto!): Product!
   deleteProduct(id: String!): Product!
+  createUser(input: CreateUserDto!): User!
+  updateUser(input: UpdateUserDto!): User!
+  deleteUser(id: String!): User!
 }
 
 input CreateProductDto {
@@ -30,5 +49,16 @@ input UpdateProductDto {
   name: String
   category: String
   price: Float
+  id: String!
+}
+
+input CreateUserDto {
+  username: String!
+  password: String!
+}
+
+input UpdateUserDto {
+  username: String
+  password: String
   id: String!
 }
