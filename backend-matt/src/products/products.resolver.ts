@@ -29,7 +29,7 @@ export class ProductsResolver {
   }
 
   @Mutation(() => Product)
-  async deleteProduct(@Args('id', { type: () => String }) id: string): Promise<void> {
+  async deleteProduct(@Args('id', { type: () => String }) id: string): Promise<Product> {
     return this.productsService.remove(id);
   }
 }

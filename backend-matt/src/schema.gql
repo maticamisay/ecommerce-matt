@@ -2,10 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Category {
+  id: String!
+  name: String!
+}
+
 type Product {
   id: String!
   name: String!
-  category: String!
+  category: Category!
   price: Float!
 }
 
@@ -28,6 +33,8 @@ type Query {
   product(id: String!): Product!
   users: [User!]!
   user(id: String!): User!
+  categories: [Category!]!
+  category(id: String!): Category!
 }
 
 type Mutation {
@@ -37,6 +44,9 @@ type Mutation {
   createUser(input: CreateUserDto!): User!
   updateUser(input: UpdateUserDto!): User!
   deleteUser(id: String!): User!
+  createCategory(input: CreateCategoryDto!): Category!
+  updateCategory(input: UpdateCategoryDto!): Category!
+  deleteCategory(id: String!): Category!
 }
 
 input CreateProductDto {
@@ -60,5 +70,14 @@ input CreateUserDto {
 input UpdateUserDto {
   username: String
   password: String
+  id: String!
+}
+
+input CreateCategoryDto {
+  name: String!
+}
+
+input UpdateCategoryDto {
+  name: String
   id: String!
 }
