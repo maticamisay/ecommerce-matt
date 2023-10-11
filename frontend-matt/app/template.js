@@ -2,6 +2,7 @@ import Container from "@/components/layout/Container";
 import Navbar from "@/components/layout/Navbar";
 import React from "react";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const template = ({ children }) => {
   return (

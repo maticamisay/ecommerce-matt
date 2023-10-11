@@ -16,13 +16,25 @@ const Page = () => {
           Añadir producto
         </Link>
         <Link
+          href="/admin/productos"
+          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded text-center"
+        >
+          Ver listado de productos
+        </Link>
+        <Link
           href="/admin/ver-pedidos"
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center"
         >
           Ver Pedidos
         </Link>
         <Link
-          href="/admin/crear-categorias"
+          href="/admin/categorias"
+          className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-center"
+        >
+          Ver listado de categorías
+        </Link>
+        <Link
+          href="/admin/categorias/crear"
           className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center"
         >
           Crear Categorías
@@ -32,18 +44,6 @@ const Page = () => {
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center"
         >
           Crear Contenido
-        </Link>
-        <Link
-          href="/admin/productos"
-          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded text-center"
-        >
-          Ver listado de productos
-        </Link>
-        <Link
-          href="/admin/listado-categorias"
-          className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-center"
-        >
-          Ver listado de categorías
         </Link>
       </div>
     </Card>

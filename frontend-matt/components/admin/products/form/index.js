@@ -1,38 +1,21 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, gql } from "@apollo/client";
-
-const CREATE_PRODUCT = gql`
-  mutation CreateProduct(
-    $nombre: String!
-    $precio: Float!
-    $categoria: String!
-  ) {
-    createProduct(
-      input: { name: $nombre, price: $precio, category: $categoria }
-    ) {
-      id
-      name
-      price
-      category
-    }
-  }
-`;
+import { useMutation } from "@apollo/client";
+import { CREATE_PRODUCT } from "@/graphql/mutations/products";
+import { toast } from "react-toastify";
 
 const Form = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const [createProduct, { data, loading, error }] = useMutation(CREATE_PRODUCT);
 
-  console.log(data);
-
   const onSubmit = (data) => {
-    console.log(data);
     try {
       createProduct({
         variables: {
@@ -41,6 +24,8 @@ const Form = () => {
           categoria: data.categoria,
         },
       });
+      toast.success("Producto creado correctamente");
+      reset();
     } catch (error) {
       console.log(error);
     }

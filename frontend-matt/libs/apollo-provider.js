@@ -1,24 +1,24 @@
 // lib/apollo-provider.js
-'use client';
+"use client";
 
-import { ApolloLink, HttpLink } from '@apollo/client';
+import { ApolloLink, HttpLink } from "@apollo/client";
 import {
   NextSSRApolloClient,
   ApolloNextAppProvider,
   NextSSRInMemoryCache,
   SSRMultipartLink,
-} from '@apollo/experimental-nextjs-app-support/ssr';
+} from "@apollo/experimental-nextjs-app-support/ssr";
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: 'http://localhost:8080/graphql',
-    fetchOptions: { cache: 'no-store' },
+    uri: "http://localhost:8080/graphql",
+    fetchOptions: { cache: "no-store" },
   });
-
+  console.log("provider ", process.env.SERVER_URL);
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
     link:
-      typeof window === 'undefined'
+      typeof window === "undefined"
         ? ApolloLink.from([
             new SSRMultipartLink({
               stripDefer: true,
@@ -30,5 +30,9 @@ function makeClient() {
 }
 
 export function ApolloWrapper({ children }) {
-  return <ApolloNextAppProvider makeClient={makeClient}>{children}</ApolloNextAppProvider>;
+  return (
+    <ApolloNextAppProvider makeClient={makeClient}>
+      {children}
+    </ApolloNextAppProvider>
+  );
 }
