@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { CREATE_PRODUCT } from "@/graphql/mutations/products";
 import { toast } from "react-toastify";
+import { FaChevronDown } from "react-icons/fa";
 
-const Form = () => {
+const FormProduct = ({ categories = [] }) => {
   const {
     register,
     handleSubmit,
@@ -17,19 +18,21 @@ const Form = () => {
 
   const onSubmit = (data) => {
     try {
-      createProduct({
-        variables: {
-          nombre: data.nombre,
-          precio: parseFloat(data.precio),
-          categoria: data.categoria,
-        },
-      });
-      toast.success("Producto creado correctamente");
+      console.log(data);
+      // createProduct({
+      //   variables: {
+      //     nombre: data.nombre,
+      //     precio: parseFloat(data.precio),
+      //     categoria: data.categoria,
+      //   },
+      // });
+      // toast.success("Producto creado correctamente");
       reset();
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(data);
   return (
     <>
       {error && <p className="text-red-500 mb-2">Error: {error.message}</p>}
@@ -77,27 +80,38 @@ const Form = () => {
             </span>
           )}
         </div>
-        <div className="mb-4">
+        <div className="mb-4 ">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="categoria"
           >
             Categoría:
           </label>
-          <input
-            {...register("categoria", {
-              required: "Este campo es obligatorio",
-            })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="categoria"
-            type="text"
-            placeholder="Categoría del producto"
-          />
-          {errors.categoria && (
-            <span className="text-red-500 text-xs mt-2">
-              {errors.categoria.message}
-            </span>
-          )}
+          <div className="relative">
+            <select
+              {...register("categoria", {
+                required: "Este campo es obligatorio",
+              })}
+              className="shadow appearance-none border rounded w-full py-2 px-3 pr-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="categoria"
+              defaultValue={""}
+            >
+              <option value="" disabled>
+                Seleccione una categoría
+              </option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+            <FaChevronDown className="absolute right-2.5 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+            {errors.categoria && (
+              <span className="text-red-500 text-xs mt-2">
+                {errors.categoria.message}
+              </span>
+            )}
+          </div>
         </div>
         <div className="col-span-full flex justify-center mt-4">
           <button
@@ -112,4 +126,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FormProduct;

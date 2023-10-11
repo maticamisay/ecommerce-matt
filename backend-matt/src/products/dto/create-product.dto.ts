@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsMongoId } from 'class-validator';
 
 @InputType()
 export class CreateProductDto {
@@ -9,7 +9,7 @@ export class CreateProductDto {
   name: string;
 
   @Field()
-  @IsString()
+  @IsMongoId()
   @IsNotEmpty()
   category: string;
 

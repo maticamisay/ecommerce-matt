@@ -12,7 +12,10 @@ export const CREATE_PRODUCT = gql`
       id
       name
       price
-      category
+      category {
+        id
+        name
+      }
     }
   }
 `;

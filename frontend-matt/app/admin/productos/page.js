@@ -10,7 +10,6 @@ const ProductsPage = async () => {
   const { data } = await getClient().query({
     query: GET_PRODUCTS,
   });
-
   return (
     <Card>
       <BackNavigation />
